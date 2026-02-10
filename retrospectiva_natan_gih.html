@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Você 💙</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: #0e0e0e;
+      color: #f2f2f2;
+      line-height: 1.6;
+      text-align: center;
+      padding-bottom: 80px;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1, h2 {
+      margin-bottom: 16px;
+    }
+
+    p {
+      margin-bottom: 24px;
+      font-size: 1.1rem;
+    }
+
+    img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 16px;
+      margin-top: 20px;
+    }
+
+    /* ===== ANIMAÇÕES ===== */
+    .fade {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .swipe {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.8s ease;
+    }
+
+    .show {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    /* ===== DUAS FOTOS ===== */
+    .duas-fotos {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .duas-fotos img {
+      max-width: 260px;
+    }
+
+    .duas-fotos img:nth-child(even) {
+      transform: translateX(-40px);
+    }
+
+    /* ===== BOTÃO MÚSICA ===== */
+    .music-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      color: #000;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+
+    .music-btn.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section>
+    <h1 class="fade">Oi, você 💙</h1>
+    <p class="fade">
+      Isso aqui é simples, mas é de verdade.
+    </p>
+    <img src="f1.jpg" class="swipe" alt="primeiro momento">
+  </section>
+
+  <section>
+    <h2 class="fade">O começo</h2>
+    <p class="fade">
+      Nada foi ensaiado. Nada foi forçado. Só aconteceu.
+    </p>
+    <img src="f2.jpg" class="swipe" alt="o começo">
+  </section>
+
+  <section>
+    <h2 class="fade">O que ficou</h2>
+    <p class="fade">
+      Cada detalhe, cada silêncio confortável, cada riso bobo.
+    </p>
+    <img src="f3.jpg" class="swipe" alt="momentos">
+  </section>
+
+  <section>
+    <h2 class="fade">Obrigado por ser você</h2>
+    <p class="fade">
+      Por cada sorriso, cada abraço, cada momento.
+    </p>
+
+    <div class="duas-fotos">
+      <img src="f6.jpg" class="swipe" alt="a gente se entende">
+      <img src="f7.jpg" class="swipe" alt="sem dizer uma palavra">
+    </div>
+  </section>
+
+  <!-- ===== MÚSICA ===== -->
+  <audio id="bgMusic" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-btn" id="playMusic">
+    ▶️ Tocar música
+  </button>
+
+  <script>
+    /* ===== ANIMAÇÕES ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".fade, .swipe")
+      .forEach(el => observer.observe(el));
+
+    /* ===== MÚSICA COM TOQUE ===== */
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("playMusic");
+
+    btn.addEventListener("click", () => {
+      music.play();
+      btn.classList.add("hide");
+    });
+  </script>
+
+</body>
+</html>
